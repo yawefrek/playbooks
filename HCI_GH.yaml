@@ -1,0 +1,26 @@
+---
+
+- name: Connect to VMware HCI
+  hosts: localhost
+  gather_facts: no
+  collections:
+    - community.vmware
+
+  vars:
+    vcenter_hostname: ga-pwflx-vcsa.mtn.local
+    vcenter_username: administrator@mtn.local
+    vcenter_password: VMwar3!!
+    validate_certs: false
+
+  tasks:
+    - name: Get vCenter info
+      vmware_about_info:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: "{{ validate_certs }}"
+      register: vc_info
+
+    - debug:
+        var: vc_info
+
